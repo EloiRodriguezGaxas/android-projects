@@ -1,60 +1,83 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
-import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.domain.Student;
 
 public class MainActivity extends AppCompatActivity {
 
     private static ArrayList<String> dummyItems;
     private ListView list;
-    private ArrayAdapter<String> itemsAdapter;
     private static final int OPERATION_CODE = 0;
+    private DbAdapter mDbAdapter;
+    private SimpleCursorAdapter itemsAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         list = (ListView) findViewById(R.id.studentList);
 
-       this.getDummyItems();
-        this.itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                this.dummyItems);
-        list.setAdapter(itemsAdapter);
+        mDbAdapter = DbAdapter.getInstance(getApplicationContext());
+        mDbAdapter.open();
+
+        if (mDbAdapter.isEmpty()) {
+            mDbAdapter.createTodo("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
+            mDbAdapter.createTodo("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
+            mDbAdapter.createTodo("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
+        }
+
+        fillData();
 
 
-        FloatingActionButton addBtn = (FloatingActionButton) findViewById(R.id.addBtn);
+        /*FloatingActionButton addBtn = (FloatingActionButton) findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent calling = new Intent(MainActivity.this, StudentFormCreate.class);
                 startActivityForResult(calling, OPERATION_CODE);
             }
-        });
+        });*/
     }
 
-    public static void createdStudent(Student student){
+    private void fillData() {
+        Cursor notesCursor = mDbAdapter.fetchAllTodos();
 
-        dummyItems.add(student.toString());
+        //Create an array to specify the fields we want to display in the list
+        String[] from = new String[]{DbAdapter.Todo.KEY_NOM, DbAdapter.Todo.KEY_SURNAME, DbAdapter.Todo.KEY_GRAU};
+
+        //and an array of the fields we want to bind those fields to
+        int[] to = new int[]{android.R.id.text1};
+
+        //Now create a simple cursor adapter and set it to display
+        itemsAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, notesCursor, from, to, 0);
+
+        list.setAdapter(itemsAdapter);
     }
+
+    @Override
+    public void onDestroy() {
+        mDbAdapter.close();
+        super.onDestroy();
+    }
+
 
     private void changeToCreate() {
 
     }
-
+/*
    public  ArrayList<String> getDummyItems() {
 
         dummyItems=new ArrayList<>();
@@ -63,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         return dummyItems;
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

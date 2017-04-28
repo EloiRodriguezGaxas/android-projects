@@ -80,7 +80,7 @@ public class StudentFormCreate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               Student  s= new Student(nom.toString() , surname.toString(), telefon.toString(), dni.toString(), grauEscollit, cursEscollit);
-                MainActivity.createdStudent(s);
+
 
                 Intent calling = new Intent(StudentFormCreate.this, MainActivity.class);
                 setResult(RESULT_OK, calling);
