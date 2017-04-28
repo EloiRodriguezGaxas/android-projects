@@ -1,5 +1,8 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.domain;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by eloit on 26/4/2017.
  */
@@ -13,6 +16,7 @@ public class Student {
     private String grau;
     private String curs;
 
+
     public Student(String nom, String cognom, String telf, String dni, String grau, String curs) {
         this.nom = nom;
         this.cognom = cognom;
@@ -20,7 +24,9 @@ public class Student {
         this.dni = dni;
         this.grau = grau;
         this.curs = curs;
+
     }
+
 
     public String getNom() {
         return nom;

@@ -18,7 +18,7 @@ import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodrigu
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> dummyItems;
+    private static ArrayList<String> dummyItems;
     private ListView list;
     private ArrayAdapter<String> itemsAdapter;
     private static final int OPERATION_CODE = 0;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         list = (ListView) findViewById(R.id.studentList);
 
-        this.getDummyItems();
+       this.getDummyItems();
         this.itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
                 this.dummyItems);
         list.setAdapter(itemsAdapter);
@@ -46,21 +46,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public static void createdStudent(Student student){
+
+        dummyItems.add(student.toString());
+    }
+
     private void changeToCreate() {
 
     }
 
-    public ArrayList<String> getDummyItems() {
-        dummyItems = new ArrayList<String>();
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
-        dummyItems.add((new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r")).toString());
+   public  ArrayList<String> getDummyItems() {
+
+        dummyItems=new ArrayList<>();
+       for (int i = 0; i<13; i++)
+            dummyItems.add(new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r").toString());
+
+
         return dummyItems;
     }
 
