@@ -78,6 +78,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return nom + " " + cognom + "\n" + "\n" + grau + "\n";
+        return nom + " " + cognom + " " + " " + grau + " ";
     }
 }

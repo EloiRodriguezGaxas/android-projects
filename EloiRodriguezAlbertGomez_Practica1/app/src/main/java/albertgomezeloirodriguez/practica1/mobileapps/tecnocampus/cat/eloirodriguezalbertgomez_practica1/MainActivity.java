@@ -9,7 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 
@@ -20,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int OPERATION_CODE = 0;
     private DbAdapter mDbAdapter;
     private SimpleCursorAdapter itemsAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,23 +36,44 @@ public class MainActivity extends AppCompatActivity {
         mDbAdapter = DbAdapter.getInstance(getApplicationContext());
         mDbAdapter.open();
 
+        //mDbAdapter.upgrade();
+
         if (mDbAdapter.isEmpty()) {
-            mDbAdapter.createTodo("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
-            mDbAdapter.createTodo("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
-            mDbAdapter.createTodo("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
+            mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
+            mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
+            mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
         }
 
         fillData();
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        /*FloatingActionButton addBtn = (FloatingActionButton) findViewById(R.id.addBtn);
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
+
+                popupMenu.getMenuInflater().inflate(R.menu.pop_up_menu, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popupMenu.show();
+
+            }
+        });
+
+        FloatingActionButton addBtn = (FloatingActionButton) findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent calling = new Intent(MainActivity.this, StudentFormCreate.class);
                 startActivityForResult(calling, OPERATION_CODE);
             }
-        });*/
+        });
     }
 
     private void fillData() {

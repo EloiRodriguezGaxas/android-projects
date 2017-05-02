@@ -3,12 +3,14 @@ package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodrig
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.domain.Student;
 
@@ -24,14 +26,16 @@ public class StudentFormCreate extends AppCompatActivity {
     private ArrayAdapter<String> adapterCurs;
     private static final int OPERATION_CODE = 0;
 
-
-    private Intent calling;
+    private DbAdapter mDbAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_form_create);
+
+        mDbAdapter = DbAdapter.getInstance(getApplicationContext());
+        mDbAdapter.open();
 
         nom = (EditText) this.findViewById(R.id.textEditName);
         surname = (EditText) this.findViewById(R.id.editTextSurname);
@@ -46,12 +50,12 @@ public class StudentFormCreate extends AppCompatActivity {
         grauSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                grauEscollit=graus[position];
+                grauEscollit = graus[position];
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-            grauEscollit=graus[0];
+                grauEscollit = graus[0];
             }
         });
 
@@ -63,29 +67,45 @@ public class StudentFormCreate extends AppCompatActivity {
         courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cursEscollit=curs[position];
+                cursEscollit = curs[position];
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                cursEscollit=curs[0];
+                cursEscollit = curs[0];
             }
         });
 
 
-
-
-        createStudent=(Button)this.findViewById(R.id.createStudentBtn);
+        createStudent = (Button) this.findViewById(R.id.createStudentBtn);
         createStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Student  s= new Student(nom.toString() , surname.toString(), telefon.toString(), dni.toString(), grauEscollit, cursEscollit);
+
+                try {
+
+                    Log.i("[INFO]", "Create new Student");
+
+                    Student s = new Student(nom.toString(), surname.toString(), telefon.toString(),
+                            dni.toString(), grauEscollit, cursEscollit);
+
+                    Log.i("[INFO]", s.toString());
+
+                    mDbAdapter.createStudent(s.getNom(), s.getCognom(), s.getDni(), s.getTelf(),
+                            s.getGrau(), s.getCurs());
 
 
-                Intent calling = new Intent(StudentFormCreate.this, MainActivity.class);
-                setResult(RESULT_OK, calling);
-                startActivityForResult(calling, OPERATION_CODE);
-                finish();
+                    //mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
+
+                    Intent calling = new Intent(StudentFormCreate.this, MainActivity.class);
+                    setResult(RESULT_OK, calling);
+                    startActivityForResult(calling, OPERATION_CODE);
+                    finish();
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fill all the fields", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

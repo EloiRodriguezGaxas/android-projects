@@ -22,23 +22,23 @@ public class DbAdapter {
 
     public static abstract class Todo implements BaseColumns {
         public static final String KEY_NOM = "nom";
+        public static final String KEY_ROWID = "_id";
         public static final String KEY_SURNAME = "surname";
         public static final String KEY_DNI = "dni";
         public static final String KEY_TELF = "telf";
         public static final String KEY_CURS = "curs";
         public static final String KEY_GRAU = "grau";
-        public static final String KEY_ROWID = "_id";
         private static final String TABLE_NAME = "todo";
 
         private static final String CREATE =
-                "CREATE TABLE " + TABLE_NAME + "( " +
-                        _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                "CREATE TABLE " + TABLE_NAME + "( "
+                        + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                         + KEY_NOM + " TEXT NOT NULL,"
-                        + KEY_SURNAME + ", "
-                        + KEY_DNI + ", "
-                        + KEY_TELF + ", "
-                        + KEY_GRAU + ", "
-                        + KEY_CURS + ")";
+                        + KEY_SURNAME + " TEXT NOT NULL, "
+                        + KEY_DNI + " TEXT NOT NULL, "
+                        + KEY_TELF + " TEXT NOT NULL, "
+                        + KEY_GRAU + " TEXT NOT NULL, "
+                        + KEY_CURS + " TEXT NOT NULL)";
 
         public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
@@ -128,10 +128,11 @@ public class DbAdapter {
      * successfully created return the new rowId for that note, otherwise return
      * a -1 to indicate failure.
      *
-     * @param title the title of the note
+     *  title the title of the note
      * @return rowId or -1 if failed
      */
-    public long createTodo(String nom, String surname,
+
+    public long createStudent(String nom, String surname,
                            String dni, String telf, String grau, String curs) {
 
         ContentValues initialValues = new ContentValues();
@@ -149,7 +150,7 @@ public class DbAdapter {
     /**
      * Delete the note with the given rowId
      *
-     * @param rowId id of note to delete
+     *  rowId id of note to delete
      * @return true if deleted, false otherwise
      */
     public boolean deleteTodo(String dni) {
@@ -165,7 +166,7 @@ public class DbAdapter {
     public Cursor fetchAllTodos() {
 
         return mDb.query(Todo.TABLE_NAME, new String[]{
-                Todo.KEY_NOM, Todo.KEY_SURNAME, Todo.KEY_GRAU}, null, null, null, null, null);
+                Todo.KEY_ROWID, Todo.KEY_NOM, Todo.KEY_SURNAME, Todo.KEY_GRAU}, null, null, null, null, null);
     }
 
     /**
