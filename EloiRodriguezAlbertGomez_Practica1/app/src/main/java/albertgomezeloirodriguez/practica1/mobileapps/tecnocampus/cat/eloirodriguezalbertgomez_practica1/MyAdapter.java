@@ -1,5 +1,6 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -50,26 +51,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mRootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                PopupMenu popupMenu = new PopupMenu(MainActivity.getContext(), v);
+                Log.d("SwA", "Cliiiiiiiickkkkkk");
+
+                PopupMenu popupMenu = new PopupMenu(holder.mRootView.getContext(), v);
 
                 popupMenu.getMenuInflater().inflate(R.menu.pop_up_menu, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
 
+                        Toast.makeText
+                                (holder.mRootView.getContext(),
+                                "You clicked: " + item.getTitle(),
+                                Toast.LENGTH_SHORT).show();
+                        
                         return true;
                     }
-
-
                 });
-
-
-                popupMenu.show();            }
+                popupMenu.show();
+            }
         });
 
 

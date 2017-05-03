@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     public static Context getContext() {
-        return MainActivity.this;
+        return MainActivity.getContext();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(mAdapter);
 
-      list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    /*  list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
 
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
 
         FloatingActionButton addBtn = (FloatingActionButton) findViewById(R.id.addBtn);
