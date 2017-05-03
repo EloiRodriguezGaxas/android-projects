@@ -69,7 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                 (holder.mRootView.getContext(),
                                 "You clicked: " + item.getTitle(),
                                 Toast.LENGTH_SHORT).show();
-                        
+
                         return true;
                     }
                 });

@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.domain.Student;
 
-public class  StudentFormCreate extends AppCompatActivity {
+public class StudentFormCreate extends AppCompatActivity {
 
     private EditText nom, surname, dni, telefon;
     private final static String[] graus = {"GEI", "Ade", "CAFE", "GMA", "GV"};
@@ -85,6 +85,14 @@ public class  StudentFormCreate extends AppCompatActivity {
                 try {
 
                     Log.i("[INFO]", "Create new Student");
+
+                    if (nom.getText().toString().equals("")
+                            || surname.getText().toString().equals("")
+                            || telefon.getText().toString().equals("")
+                            || dni.getText().toString().equals("")) {
+
+                        throw new Exception("Not all fields yet");
+                    }
 
                     Student s = new Student(nom.getText().toString(), surname.getText().toString(), telefon.getText().toString(),
                             dni.getText().toString(), grauEscollit, cursEscollit);

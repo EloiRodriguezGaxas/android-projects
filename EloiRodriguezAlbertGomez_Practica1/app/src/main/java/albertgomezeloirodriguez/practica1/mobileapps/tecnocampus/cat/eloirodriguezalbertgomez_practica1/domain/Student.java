@@ -1,5 +1,7 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.domain;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,11 +11,17 @@ import java.util.List;
 
 public class Student {
 
+    @NotNull
     private String nom;
+    @NotNull
     private String cognom;
+    @NotNull
     private String telf;
+    @NotNull
     private String dni;
+    @NotNull
     private String grau;
+    @NotNull
     private String curs;
 
 

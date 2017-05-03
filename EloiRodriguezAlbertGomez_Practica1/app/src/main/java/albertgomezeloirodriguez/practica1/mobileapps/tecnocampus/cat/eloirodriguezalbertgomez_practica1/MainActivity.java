@@ -74,32 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(mAdapter);
 
-    /*  list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
-
-                PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
-
-                popupMenu.getMenuInflater().inflate(R.menu.pop_up_menu, popupMenu.getMenu());
-
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(MainActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
-
-                        return true;
-                    }
-
-
-                });
-
-
-                popupMenu.show();
-
-
-            }
-        });*/
-
-
         FloatingActionButton addBtn = (FloatingActionButton) findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
