@@ -127,13 +127,14 @@ public class DbAdapter {
      * Create a new note using the title and body provided. If the note is
      * successfully created return the new rowId for that note, otherwise return
      * a -1 to indicate failure.
+     * <p>
+     * title the title of the note
      *
-     *  title the title of the note
      * @return rowId or -1 if failed
      */
 
     public long createStudent(String nom, String surname,
-                           String dni, String telf, String grau, String curs) {
+                              String dni, String telf, String grau, String curs) {
 
         ContentValues initialValues = new ContentValues();
         initialValues.put(Todo.KEY_NOM, nom);
@@ -149,8 +150,9 @@ public class DbAdapter {
 
     /**
      * Delete the note with the given rowId
+     * <p>
+     * rowId id of note to delete
      *
-     *  rowId id of note to delete
      * @return true if deleted, false otherwise
      */
     public boolean deleteTodo(String dni) {
@@ -166,7 +168,8 @@ public class DbAdapter {
     public Cursor fetchAllTodos() {
 
         return mDb.query(Todo.TABLE_NAME, new String[]{
-                Todo.KEY_ROWID, Todo.KEY_NOM, Todo.KEY_SURNAME, Todo.KEY_GRAU}, null, null, null, null, null);
+                Todo.KEY_ROWID, Todo.KEY_NOM, Todo.KEY_SURNAME,
+                Todo.KEY_TELF, Todo.KEY_DNI, Todo.KEY_GRAU, Todo.KEY_CURS}, null, null, null, null, null);
     }
 
     /**
@@ -179,7 +182,7 @@ public class DbAdapter {
     public Cursor fetchTodo(long rowId) throws SQLException {
 
         Cursor mCursor = mDb.query(true, Todo.TABLE_NAME, new String[]{Todo.KEY_ROWID, Todo.KEY_NOM,
-                Todo.KEY_SURNAME, Todo.KEY_TELF, Todo.KEY_DNI, Todo.KEY_GRAU, Todo.KEY_CURS},
+                        Todo.KEY_SURNAME, Todo.KEY_TELF, Todo.KEY_DNI, Todo.KEY_GRAU, Todo.KEY_CURS},
                 Todo.KEY_ROWID + "=" + rowId, null, null, null, null, null);
 
         if (mCursor != null) {

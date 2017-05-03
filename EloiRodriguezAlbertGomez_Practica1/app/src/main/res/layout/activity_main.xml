@@ -15,15 +15,10 @@
         app:backgroundTint="@color/colorCustom"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ListView
-            android:id="@+id/studentList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+        android:scrollbars="vertical" />
 
 </android.support.design.widget.CoordinatorLayout>
