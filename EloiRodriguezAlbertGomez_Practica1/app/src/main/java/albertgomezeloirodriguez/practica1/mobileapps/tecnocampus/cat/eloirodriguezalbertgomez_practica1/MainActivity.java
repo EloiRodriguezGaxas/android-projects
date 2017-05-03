@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
 
                 PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
 
@@ -56,15 +56,26 @@ public class MainActivity extends AppCompatActivity {
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+
                         return true;
                     }
+
+
                 });
+
 
                 popupMenu.show();
 
+
+
+
+
             }
         });
+
+
+
 
         FloatingActionButton addBtn = (FloatingActionButton) findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {

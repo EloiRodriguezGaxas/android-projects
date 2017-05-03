@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.domain.Student;
 
-public class StudentFormCreate extends AppCompatActivity {
+public class  StudentFormCreate extends AppCompatActivity {
 
     private EditText nom, surname, dni, telefon;
     private final static String[] graus = {"GEI", "Ade", "CAFE", "GMA", "GV"};
@@ -86,8 +86,8 @@ public class StudentFormCreate extends AppCompatActivity {
 
                     Log.i("[INFO]", "Create new Student");
 
-                    Student s = new Student(nom.toString(), surname.toString(), telefon.toString(),
-                            dni.toString(), grauEscollit, cursEscollit);
+                    Student s = new Student(nom.getText().toString(), surname.getText().toString(), telefon.getText().toString(),
+                            dni.getText().toString(), grauEscollit, cursEscollit);
 
                     Log.i("[INFO]", s.toString());
 
