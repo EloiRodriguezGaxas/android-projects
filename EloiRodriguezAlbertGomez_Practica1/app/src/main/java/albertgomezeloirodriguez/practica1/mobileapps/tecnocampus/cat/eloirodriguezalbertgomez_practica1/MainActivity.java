@@ -28,16 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Student> dummyItems;
     private ListView list;
     private static final int OPERATION_CODE = 0;
-    private DbAdapter mDbAdapter;
+    //private DbAdapter mDbAdapter;
     private SimpleCursorAdapter itemsAdapter;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
-    public static Context getContext() {
-        return MainActivity.getContext();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +41,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //list = (ListView) findViewById(R.id.studentList);
-
-        mDbAdapter = DbAdapter.getInstance(getApplicationContext());
-        mDbAdapter.open();
+      //  mDbAdapter = DbAdapter.getInstance(getApplicationContext());
+      //  mDbAdapter.open();
 
         this.dummyItems = new ArrayList<>();
 
         //mDbAdapter.upgrade();
 
-        if (mDbAdapter.isEmpty()) {
+     /*   if (mDbAdapter.isEmpty()) {
             mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
             mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
             mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
-        }
+        }*/
 
-        fillData();
+        //fillData();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
@@ -70,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MyAdapter(dummyItems);
+        mAdapter = new MyAdapter(getApplicationContext());
 
         mRecyclerView.setAdapter(mAdapter);
 
@@ -79,12 +73,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent calling = new Intent(MainActivity.this, StudentFormCreate.class);
-                startActivityForResult(calling, OPERATION_CODE);
+                startActivity(calling);
+                finish();
             }
         });
     }
 
-    private void fillData() {
+    /*private void fillData() {
         Cursor notesCursor = mDbAdapter.fetchAllTodos();
 
         while (notesCursor.moveToNext()) {
@@ -106,29 +101,16 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        //Create an array to specify the fields we want to display in the list
-/*        String[] from = new String[]{DbAdapter.Todo.KEY_NOM, DbAdapter.Todo.KEY_SURNAME, DbAdapter.Todo.KEY_GRAU};
-
-        //and an array of the fields we want to bind those fields to
-        int[] to = new int[]{android.R.id.text1};
-
-        //Now create a simple cursor adapter and set it to display
-        itemsAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, notesCursor, from, to, 0);
+    }*/
 
 
-        list.setAdapter(itemsAdapter); */
-    }
 
     @Override
     public void onDestroy() {
-        mDbAdapter.close();
+        //mDbAdapter.close();
         super.onDestroy();
     }
 
-
-    private void changeToCreate() {
-
-    }
 /*
    public  ArrayList<String> getDummyItems() {
 

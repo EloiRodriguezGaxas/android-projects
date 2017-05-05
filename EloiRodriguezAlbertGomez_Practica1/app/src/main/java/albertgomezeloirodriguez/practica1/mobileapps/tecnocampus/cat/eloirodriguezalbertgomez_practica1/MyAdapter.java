@@ -1,11 +1,10 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodrigu
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<Student> mDataset;
+    private DbAdapter mDbAdapter;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -34,8 +34,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(ArrayList<Student> myDataset) {
-        mDataset = myDataset;
+    public MyAdapter(Context ctx) {
+        mDataset = new ArrayList<Student>();
+        mDbAdapter = DbAdapter.getInstance(ctx);
+        fillData();
+    }
+
+    private void fillData() {
+
+        mDbAdapter.open();
+
+        Cursor notesCursor = mDbAdapter.fetchAllTodos();
+
+        while (notesCursor.moveToNext()) {
+            mDataset.add(new Student(
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_NOM)),
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_SURNAME)),
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_TELF)),
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_DNI)),
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_GRAU)),
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_CURS))
+            ));
+
+            Log.d("SwA", notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_NOM)) +
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_SURNAME)) +
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_TELF)) +
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_DNI)) +
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_GRAU)) +
+                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_CURS)));
+
+        }
+
+        mDbAdapter.close();
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -56,7 +87,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
 
-                Log.d("SwA", "Cliiiiiiiickkkkkk");
+                Log.d("SwA", "Open PopUp");
 
                 PopupMenu popupMenu = new PopupMenu(holder.mRootView.getContext(), v);
 

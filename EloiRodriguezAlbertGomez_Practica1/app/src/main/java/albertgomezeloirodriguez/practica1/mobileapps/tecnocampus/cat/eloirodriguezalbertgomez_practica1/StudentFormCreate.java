@@ -21,7 +21,7 @@ public class StudentFormCreate extends AppCompatActivity {
     private final static String[] curs = {"1r", "2n", "3r", "4rt"};
     private String grauEscollit, cursEscollit;
     private Spinner grauSpinner, courseSpinner;
-    private Button createStudent;
+    private Button createStudent, cancelStudent;
     private ArrayAdapter<String> adapterGrau;
     private ArrayAdapter<String> adapterCurs;
     private static final int OPERATION_CODE = 0;
@@ -76,6 +76,17 @@ public class StudentFormCreate extends AppCompatActivity {
             }
         });
 
+        cancelStudent = (Button) this.findViewById(R.id.cancelStudentBtn);
+        cancelStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent calling = new Intent(StudentFormCreate.this, MainActivity.class);
+                startActivity(calling);
+                finish();
+
+            }
+        });
 
         createStudent = (Button) this.findViewById(R.id.createStudentBtn);
         createStudent.setOnClickListener(new View.OnClickListener() {
@@ -101,9 +112,6 @@ public class StudentFormCreate extends AppCompatActivity {
 
                     mDbAdapter.createStudent(s.getNom(), s.getCognom(), s.getDni(), s.getTelf(),
                             s.getGrau(), s.getCurs());
-
-
-                    //mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
 
                     Intent calling = new Intent(StudentFormCreate.this, MainActivity.class);
                     setResult(RESULT_OK, calling);
