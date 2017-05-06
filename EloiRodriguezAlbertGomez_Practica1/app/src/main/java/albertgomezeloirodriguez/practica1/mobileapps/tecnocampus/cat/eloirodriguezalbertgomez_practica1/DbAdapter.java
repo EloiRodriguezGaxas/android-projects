@@ -175,15 +175,15 @@ public class DbAdapter {
     /**
      * Return a Cursor positioned at the note that matches the given rowId
      *
-     * @param rowId id of note to retrieve
+     * @param dni id of note to retrieve
      * @return Cursor positioned to matching note, if found
      * @throws SQLException if note could not be found/retrieved
      */
-    public Cursor fetchTodo(long rowId) throws SQLException {
+    public Cursor fetchTodo(String dni) throws SQLException {
 
         Cursor mCursor = mDb.query(true, Todo.TABLE_NAME, new String[]{Todo.KEY_ROWID, Todo.KEY_NOM,
                         Todo.KEY_SURNAME, Todo.KEY_TELF, Todo.KEY_DNI, Todo.KEY_GRAU, Todo.KEY_CURS},
-                Todo.KEY_ROWID + "=" + rowId, null, null, null, null, null);
+                Todo.KEY_DNI + "=" + dni, null, null, null, null, null);
 
         if (mCursor != null) {
             mCursor.moveToFirst();

@@ -1,6 +1,7 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -102,11 +103,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
                         switch (item.getItemId()) {
                             case R.id.viewStudent:
+                                Intent intent = new Intent(holder.mRootView.getContext(), StudentView.class);
+                                String message = mDataset.get(position).getDni();
+                                intent.putExtra("studentDni", message);
+                                holder.mRootView.getContext().startActivity(intent);
                                 Toast.makeText
                                         (holder.mRootView.getContext(),
                                                 "You clicked: VIEW",
                                                 Toast.LENGTH_SHORT).show();
                                 break;
+
                             case R.id.editStudent:
                                 Toast.makeText
                                         (holder.mRootView.getContext(),
