@@ -25,12 +25,6 @@ import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodrigu
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Student> dummyItems;
-    private ListView list;
-    private static final int OPERATION_CODE = 0;
-    //private DbAdapter mDbAdapter;
-    private SimpleCursorAdapter itemsAdapter;
-
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -41,18 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      //  mDbAdapter = DbAdapter.getInstance(getApplicationContext());
-      //  mDbAdapter.open();
 
-        this.dummyItems = new ArrayList<>();
-
-     /*   if (mDbAdapter.isEmpty()) {
-            mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
-            mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
-            mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
-        }*/
-
-        //fillData();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
@@ -77,48 +60,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*private void fillData() {
-        Cursor notesCursor = mDbAdapter.fetchAllTodos();
-
-        while (notesCursor.moveToNext()) {
-            dummyItems.add(new Student(
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_NOM)),
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_SURNAME)),
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_TELF)),
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_DNI)),
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_GRAU)),
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_CURS))
-            ));
-
-            Log.d("SwA", notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_NOM)) +
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_SURNAME)) +
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_TELF)) +
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_DNI)) +
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_GRAU)) +
-                    notesCursor.getString(notesCursor.getColumnIndex(DbAdapter.Todo.KEY_CURS)));
-
-        }
-
-    }*/
 
 
 
     @Override
     public void onDestroy() {
-        //mDbAdapter.close();
         super.onDestroy();
     }
-
-/*
-   public  ArrayList<String> getDummyItems() {
-
-        dummyItems=new ArrayList<>();
-       for (int i = 0; i<13; i++)
-            dummyItems.add(new Student("pepe", "gomez", "666666666", "77621235S", "GEI", "1r").toString());
-
-
-        return dummyItems;
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
