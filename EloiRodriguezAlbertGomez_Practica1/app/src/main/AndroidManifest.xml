@@ -20,7 +20,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".StudentFormCreate" />
-        <activity android:name=".StudentView"></activity>
+        <activity android:name=".StudentView" />
+        <activity
+            android:name=".EditStudent"
+            android:label="@string/title_activity_edit_student"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

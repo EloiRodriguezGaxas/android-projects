@@ -1,6 +1,7 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +20,8 @@ import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodrigu
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<Student> mDataset;
     private DbAdapter mDbAdapter;
+
+    public static final String EXTRA_MESSAGE = "studentDni";
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -101,18 +104,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     public boolean onMenuItemClick(MenuItem item) {
 
                         switch (item.getItemId()) {
+
                             case R.id.viewStudent:
                                 Toast.makeText
                                         (holder.mRootView.getContext(),
                                                 "You clicked: VIEW",
                                                 Toast.LENGTH_SHORT).show();
                                 break;
+
                             case R.id.editStudent:
+                                Intent intent = new Intent(holder.mRootView.getContext(), EditStudent.class);
+                                String message = mDataset.get(position).getDni();
+                                intent.putExtra("studentDni", message);
+                                holder.mRootView.getContext().startActivity(intent);
                                 Toast.makeText
                                         (holder.mRootView.getContext(),
                                                 "You clicked: EDIT",
                                                 Toast.LENGTH_SHORT).show();
                                 break;
+
                             case R.id.deleteStudent:
                                 mDbAdapter.open();
                                 Toast.makeText

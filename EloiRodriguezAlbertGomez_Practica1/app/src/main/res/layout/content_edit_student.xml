@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.StudentFormCreate"
-    android:weightSum="1">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.EditStudent"
+    tools:showIn="@layout/activity_edit_student">
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/textViewNameE"
         android:layout_width="83dp"
         android:layout_height="18dp"
         android:layout_marginBottom="8dp"
@@ -22,12 +22,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textEditName"
+        app:layout_constraintRight_toLeftOf="@+id/textEditNameE"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.06" />
 
     <EditText
-        android:id="@+id/textEditName"
+        android:id="@+id/textEditNameE"
         android:layout_width="209dp"
         android:layout_height="38dp"
         android:ems="10"
@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
-        android:id="@+id/textViewSurname"
+        android:id="@+id/textViewSurnameE"
         android:layout_width="83dp"
         android:layout_height="18dp"
         android:layout_marginBottom="8dp"
@@ -57,12 +57,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/editTextSurname"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName"
+        app:layout_constraintRight_toLeftOf="@+id/editTextSurnameE"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameE"
         app:layout_constraintVertical_bias="0.086" />
 
     <EditText
-        android:id="@+id/editTextSurname"
+        android:id="@+id/editTextSurnameE"
         android:layout_width="209dp"
         android:layout_height="38dp"
         android:layout_marginBottom="8dp"
@@ -74,13 +74,13 @@
         app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEditName"
+        app:layout_constraintTop_toBottomOf="@+id/textEditNameE"
         app:layout_constraintVertical_bias="0.037"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
     <TextView
-        android:id="@+id/textViewDni"
+        android:id="@+id/textViewDniE"
         android:layout_width="83dp"
         android:layout_height="18dp"
         android:layout_marginBottom="8dp"
@@ -93,12 +93,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/editTextDni"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSurname"
+        app:layout_constraintRight_toLeftOf="@+id/editTextDniE"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSurnameE"
         app:layout_constraintVertical_bias="0.102" />
 
     <EditText
-        android:id="@+id/editTextDni"
+        android:id="@+id/editTextDniE"
         android:layout_width="209dp"
         android:layout_height="38dp"
         android:layout_marginBottom="8dp"
@@ -111,13 +111,13 @@
         app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSurname"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSurnameE"
         app:layout_constraintVertical_bias="0.037"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
     <TextView
-        android:id="@+id/textViewTelf"
+        android:id="@+id/textViewTelfE"
         android:layout_width="83dp"
         android:layout_height="17dp"
         android:layout_marginBottom="8dp"
@@ -130,12 +130,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/editTextTelf"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDni"
+        app:layout_constraintRight_toLeftOf="@+id/editTextTelfE"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDniE"
         app:layout_constraintVertical_bias="0.091" />
 
     <EditText
-        android:id="@+id/editTextTelf"
+        android:id="@+id/editTextTelfE"
         android:layout_width="209dp"
         android:layout_height="38dp"
         android:layout_marginBottom="8dp"
@@ -148,13 +148,13 @@
         app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDni"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDniE"
         app:layout_constraintVertical_bias="0.037"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
     <TextView
-        android:id="@+id/textViewGrau"
+        android:id="@+id/textViewGrauE"
         android:layout_width="83dp"
         android:layout_height="18dp"
         android:layout_marginBottom="8dp"
@@ -167,17 +167,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/spinnerGrau"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTelf"
+        app:layout_constraintRight_toLeftOf="@+id/spinnerGrauE"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTelfE"
         app:layout_constraintVertical_bias="0.195" />
 
     <Spinner
-        android:id="@+id/spinnerGrau"
+        android:id="@+id/spinnerGrauE"
         android:layout_width="209dp"
         android:layout_height="38dp"
         android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelf"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTelfE"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -188,7 +188,7 @@
         app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
-        android:id="@+id/textViewCurs"
+        android:id="@+id/textViewCursE"
         android:layout_width="83dp"
         android:layout_height="18dp"
         android:layout_marginBottom="8dp"
@@ -201,17 +201,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/spinnerCurs"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGrau"
+        app:layout_constraintRight_toLeftOf="@+id/spinnerCursE"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGrauE"
         app:layout_constraintVertical_bias="0.254" />
 
     <Spinner
-        android:id="@+id/spinnerCurs"
+        android:id="@+id/spinnerCursE"
         android:layout_width="209dp"
         android:layout_height="38dp"
         android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerGrau"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGrauE"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -222,7 +222,7 @@
         app:layout_constraintHorizontal_bias="1.0" />
 
     <Button
-        android:id="@+id/createStudentBtn"
+        android:id="@+id/createStudentBtnE"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="358dp"
         android:layout_height="45dp"
@@ -243,7 +243,7 @@
         app:layout_constraintVertical_bias="0.875" />
 
     <Button
-        android:id="@+id/cancelStudentBtn"
+        android:id="@+id/cancelStudentBtnE"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="358dp"
         android:layout_height="45dp"
