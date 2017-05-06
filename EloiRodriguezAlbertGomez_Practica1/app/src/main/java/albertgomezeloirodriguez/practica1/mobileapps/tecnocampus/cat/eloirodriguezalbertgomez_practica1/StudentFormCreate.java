@@ -17,7 +17,7 @@ import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodrigu
 public class StudentFormCreate extends AppCompatActivity {
 
     private EditText nom, surname, dni, telefon;
-    private final static String[] graus = {"GEI", "Ade", "CAFE", "GMA", "GV"};
+    private final static String[] graus = {"GEI", "ADE", "CAFE", "GMA", "GV"};
     private final static String[] curs = {"1r", "2n", "3r", "4rt"};
     private String grauEscollit, cursEscollit;
     private Spinner grauSpinner, courseSpinner;
