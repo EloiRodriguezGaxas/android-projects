@@ -24,7 +24,6 @@ public class StudentFormCreate extends AppCompatActivity {
     private Button createStudent, cancelStudent;
     private ArrayAdapter<String> adapterGrau;
     private ArrayAdapter<String> adapterCurs;
-    private static final int OPERATION_CODE = 0;
 
     private DbAdapter mDbAdapter;
 
@@ -114,8 +113,7 @@ public class StudentFormCreate extends AppCompatActivity {
                             s.getGrau(), s.getCurs());
 
                     Intent calling = new Intent(StudentFormCreate.this, MainActivity.class);
-                    setResult(RESULT_OK, calling);
-                    startActivityForResult(calling, OPERATION_CODE);
+                    startActivity(calling);
                     finish();
 
                 } catch (Exception e) {

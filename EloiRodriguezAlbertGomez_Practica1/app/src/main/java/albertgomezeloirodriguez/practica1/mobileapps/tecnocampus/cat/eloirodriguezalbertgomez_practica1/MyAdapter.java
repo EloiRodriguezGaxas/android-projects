@@ -44,7 +44,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         mDbAdapter.open();
 
+        //mDbAdapter.upgrade();
+
         Cursor notesCursor = mDbAdapter.fetchAllTodos();
+
+        mDataset = new ArrayList<>();
 
         while (notesCursor.moveToNext()) {
             mDataset.add(new Student(
@@ -82,7 +86,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mRootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,10 +100,36 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
 
-                        Toast.makeText
-                                (holder.mRootView.getContext(),
-                                "You clicked: " + item.getTitle(),
-                                Toast.LENGTH_SHORT).show();
+                        switch (item.getItemId()) {
+                            case R.id.viewStudent:
+                                Toast.makeText
+                                        (holder.mRootView.getContext(),
+                                                "You clicked: VIEW",
+                                                Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.editStudent:
+                                Toast.makeText
+                                        (holder.mRootView.getContext(),
+                                                "You clicked: EDIT",
+                                                Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.deleteStudent:
+                                mDbAdapter.open();
+                                Toast.makeText
+                                        (holder.mRootView.getContext(),
+                                                "You deleted: "
+                                                        + mDataset.get(position).getNom()
+                                                        + " "
+                                                        + mDataset.get(position).getCognom(),
+                                                Toast.LENGTH_SHORT).show();
+                                Log.d("SwA", mDataset.get(position).getDni());
+                                mDbAdapter.deleteTodo(mDataset.get(position).getDni());
+                                mDbAdapter.close();
+                                fillData();
+                                notifyDataSetChanged();
+                                break;
+
+                        }
 
                         return true;
                     }

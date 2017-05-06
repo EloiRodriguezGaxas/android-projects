@@ -4,15 +4,15 @@
     tools:context="albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1.MainActivity">
 
     <item
-        android:id="@+id/one"
+        android:id="@+id/viewStudent"
         android:title="View" />
 
     <item
-        android:id="@+id/two"
+        android:id="@+id/editStudent"
         android:title="Edit" />
 
     <item
-        android:id="@+id/three"
+        android:id="@+id/deleteStudent"
         android:title="Delete" />
 
 </menu>

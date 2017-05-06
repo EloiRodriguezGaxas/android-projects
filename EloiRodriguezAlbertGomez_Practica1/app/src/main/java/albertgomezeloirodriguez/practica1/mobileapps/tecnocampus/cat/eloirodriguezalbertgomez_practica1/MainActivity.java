@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         this.dummyItems = new ArrayList<>();
 
-        //mDbAdapter.upgrade();
-
      /*   if (mDbAdapter.isEmpty()) {
             mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");
             mDbAdapter.createStudent("pepe", "gomez", "666666666", "77621235S", "GEI", "1r");

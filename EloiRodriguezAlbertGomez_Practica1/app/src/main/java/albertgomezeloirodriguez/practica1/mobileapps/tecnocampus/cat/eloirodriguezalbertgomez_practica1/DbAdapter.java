@@ -35,7 +35,7 @@ public class DbAdapter {
                         + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                         + KEY_NOM + " TEXT NOT NULL,"
                         + KEY_SURNAME + " TEXT NOT NULL, "
-                        + KEY_DNI + " TEXT NOT NULL, "
+                        + KEY_DNI + " TEXT UNIQUE, "
                         + KEY_TELF + " TEXT NOT NULL, "
                         + KEY_GRAU + " TEXT NOT NULL, "
                         + KEY_CURS + " TEXT NOT NULL)";
