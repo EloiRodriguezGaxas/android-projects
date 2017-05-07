@@ -43,24 +43,37 @@ public class StudentView extends AppCompatActivity {
         dbAdapter.open();
 
         final Cursor c=dbAdapter.fetchTodo(this.putDni);
-        this.nom.setText(c.getString(1));
-        this.surname.setText(c.getString(2));
-        this.dni.setText(c.getString(4));
-        this.telf.setText(c.getString(3));
-        this.grau.setText(c.getString(5));
-        this.curs.setText(c.getString(6));
+        this.nom.setText(c.getString(DbAdapter.Todo.ROW_NOM));
+        this.surname.setText(c.getString(DbAdapter.Todo.ROW_SURNAME));
+        this.dni.setText(c.getString(DbAdapter.Todo.ROW_DNI));
+        this.telf.setText(c.getString(DbAdapter.Todo.ROW_TELF));
+        this.grau.setText(c.getString(DbAdapter.Todo.ROW_GRAU));
+        this.curs.setText(c.getString(DbAdapter.Todo.ROW_CURS));
 
 
-        delte.setOnClickListener(new View.OnClickListener() {
+        deleteBtnListener();
+
+        editBtnListener(c);
+
+        backBtnListener();
+
+        dbAdapter.close();
+
+    }
+
+    private void backBtnListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbAdapter.deleteTodo(putDni);
                 Intent calling = new Intent(StudentView.this, MainActivity.class);
                 startActivity(calling);
                 finish();
+
             }
         });
+    }
 
+    private void editBtnListener(final Cursor c) {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,18 +84,21 @@ public class StudentView extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
-        back.setOnClickListener(new View.OnClickListener() {
+    private void deleteBtnListener() {
+        delte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dbAdapter.open();
+                dbAdapter.deleteTodo(putDni);
                 Intent calling = new Intent(StudentView.this, MainActivity.class);
                 startActivity(calling);
                 finish();
-
+                dbAdapter.close();
             }
         });
-
-        dbAdapter.close();
-
     }
+
+
 }

@@ -30,6 +30,13 @@ public class DbAdapter {
         public static final String KEY_GRAU = "grau";
         private static final String TABLE_NAME = "todo";
 
+        public static final int ROW_NOM = 1;
+        public static final int ROW_SURNAME = 2;
+        public static final int ROW_TELF = 3;
+        public static final int ROW_DNI = 4;
+        public static final int ROW_CURS = 5;
+        public static final int ROW_GRAU = 6;
+
         private static final String CREATE =
                 "CREATE TABLE " + TABLE_NAME + "( "
                         + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
