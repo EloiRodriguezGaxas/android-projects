@@ -1,11 +1,9 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1;
 
 import android.content.Intent;
-<<<<<<< HEAD
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-=======
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
->>>>>>> 57a57f2f4b04b2005ae42bf09773a3cb6e88c02e
 
 public class StudentView extends AppCompatActivity {
 
@@ -27,8 +24,6 @@ public class StudentView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_view);
-<<<<<<< HEAD
-=======
         Intent intent = getIntent();
         this.putDni= intent.getExtras().getString("studentDni");
 
@@ -84,15 +79,6 @@ public class StudentView extends AppCompatActivity {
         });
 
         dbAdapter.close();
-
-
-
-
-
-
-
-
->>>>>>> 57a57f2f4b04b2005ae42bf09773a3cb6e88c02e
 
     }
 }
