@@ -102,12 +102,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
+                        Intent intent;
+                        String message;
 
                         switch (item.getItemId()) {
 
                             case R.id.viewStudent:
-                                Intent intent = new Intent(holder.mRootView.getContext(), StudentView.class);
-                                String message = mDataset.get(position).getDni();
+                                 intent = new Intent(holder.mRootView.getContext(), StudentView.class);
+                                 message = mDataset.get(position).getDni();
                                 intent.putExtra("studentDni", message);
                                 holder.mRootView.getContext().startActivity(intent);
                                 Toast.makeText
@@ -117,8 +119,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                 break;
 
                             case R.id.editStudent:
-                                Intent intent = new Intent(holder.mRootView.getContext(), EditStudent.class);
-                                String message = mDataset.get(position).getDni();
+                                intent = new Intent(holder.mRootView.getContext(), EditStudent.class);
+                                message = mDataset.get(position).getDni();
                                 intent.putExtra("studentDni", message);
                                 holder.mRootView.getContext().startActivity(intent);
                                 Toast.makeText
