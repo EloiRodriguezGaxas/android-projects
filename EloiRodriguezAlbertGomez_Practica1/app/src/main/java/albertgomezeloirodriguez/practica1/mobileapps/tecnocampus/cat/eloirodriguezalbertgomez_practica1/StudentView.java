@@ -42,11 +42,11 @@ public class StudentView extends AppCompatActivity {
         dbAdapter=DbAdapter.getInstance(this);
         dbAdapter.open();
 
-        Cursor c=dbAdapter.fetchTodo(this.putDni);
+        final Cursor c=dbAdapter.fetchTodo(this.putDni);
         this.nom.setText(c.getString(1));
         this.surname.setText(c.getString(2));
-        this.dni.setText(c.getString(3));
-        this.telf.setText(c.getString(4));
+        this.dni.setText(c.getString(4));
+        this.telf.setText(c.getString(3));
         this.grau.setText(c.getString(5));
         this.curs.setText(c.getString(6));
 
@@ -64,7 +64,11 @@ public class StudentView extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                String messageEdit = c.getString(4);
+                Intent caliing = new Intent(StudentView.this, EditStudent.class);
+                caliing.putExtra("studentDni", messageEdit);
+                startActivity(caliing);
+                finish();
             }
         });
 
