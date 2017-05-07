@@ -102,14 +102,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
+                        Intent intent;
+                        String message;
 
                         switch (item.getItemId()) {
 
                             case R.id.viewStudent:
+<<<<<<< HEAD
                                 Intent intentView = new Intent(holder.mRootView.getContext(), StudentView.class);
                                 String messageView = mDataset.get(position).getDni();
                                 intentView.putExtra("studentDni", messageView);
                                 holder.mRootView.getContext().startActivity(intentView);
+=======
+                                 intent = new Intent(holder.mRootView.getContext(), StudentView.class);
+                                 message = mDataset.get(position).getDni();
+                                intent.putExtra("studentDni", message);
+                                holder.mRootView.getContext().startActivity(intent);
+>>>>>>> e806374b37f1918022eb8a75c65d8c7b3d04ff21
                                 Toast.makeText
                                         (holder.mRootView.getContext(),
                                                 "You clicked: VIEW",
@@ -117,10 +126,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                 break;
 
                             case R.id.editStudent:
+<<<<<<< HEAD
                                 Intent intentEdit = new Intent(holder.mRootView.getContext(), EditStudent.class);
                                 String messageEdit = mDataset.get(position).getDni();
                                 intentEdit.putExtra("studentDni", messageEdit);
                                 holder.mRootView.getContext().startActivity(intentEdit);
+=======
+                                intent = new Intent(holder.mRootView.getContext(), EditStudent.class);
+                                message = mDataset.get(position).getDni();
+                                intent.putExtra("studentDni", message);
+                                holder.mRootView.getContext().startActivity(intent);
+>>>>>>> e806374b37f1918022eb8a75c65d8c7b3d04ff21
                                 Toast.makeText
                                         (holder.mRootView.getContext(),
                                                 "You clicked: EDIT",

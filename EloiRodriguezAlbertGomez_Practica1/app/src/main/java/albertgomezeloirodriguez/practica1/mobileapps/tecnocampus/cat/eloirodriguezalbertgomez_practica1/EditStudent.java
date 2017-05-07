@@ -1,6 +1,7 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,7 +21,7 @@ import albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodrigu
 
 public class EditStudent extends AppCompatActivity {
 
-    private EditText nom, surname, dni, telefon;
+    private EditText nom, surname, telefon;
     private final static String[] graus = {"GEI", "ADE", "CAFE", "GMA", "GV"};
     private final static String[] curs = {"1r", "2n", "3r", "4rt"};
     private String grauEscollit, cursEscollit;
@@ -28,8 +29,11 @@ public class EditStudent extends AppCompatActivity {
     private Button createStudent, cancelStudent;
     private ArrayAdapter<String> adapterGrau;
     private ArrayAdapter<String> adapterCurs;
+    private TextView dni;
 
     private DbAdapter mDbAdapter;
+
+    private String dniGet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class EditStudent extends AppCompatActivity {
         setContentView(R.layout.activity_edit_student);
 
         Intent intent = getIntent();
-        String dniGet = intent.getExtras().getString("studentDni");
+        this.dniGet = intent.getExtras().getString("studentDni");
 
         Log.d("SwA", dniGet);
 
@@ -46,7 +50,7 @@ public class EditStudent extends AppCompatActivity {
 
         this.findComponents();
 
-        dni.setText(dniGet);
+        this.writeAllComponents();
 
         this.prepareSpinersListeners();
 
@@ -80,7 +84,7 @@ public class EditStudent extends AppCompatActivity {
 
         nom = (EditText) this.findViewById(R.id.textEditNameE);
         surname = (EditText) this.findViewById(R.id.editTextSurnameE);
-        dni = (EditText) this.findViewById(R.id.editTextDniE);
+        dni = (TextView) this.findViewById(R.id.editTextDniE);
         telefon = (EditText) this.findViewById(R.id.editTextTelfE);
 
         //Spiner graus
@@ -140,11 +144,11 @@ public class EditStudent extends AppCompatActivity {
             }
 
             Student s = new Student(nom.getText().toString(), surname.getText().toString(), telefon.getText().toString(),
-                    dni.getText().toString(), grauEscollit, cursEscollit);
+                    dniGet, grauEscollit, cursEscollit);
 
             Log.i("[INFO]", s.toString());
 
-            mDbAdapter.createStudent(s.getNom(), s.getCognom(), s.getDni(), s.getTelf(),
+            mDbAdapter.updateStudent(s.getNom(), s.getCognom(), s.getDni(), s.getTelf(),
                     s.getGrau(), s.getCurs());
 
             Intent calling = new Intent(EditStudent.this, MainActivity.class);
@@ -154,6 +158,50 @@ public class EditStudent extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Fill all the fields", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void writeAllComponents() {
+
+        Cursor c = mDbAdapter.fetchTodo(this.dniGet);
+
+        this.nom.setText(c.getString(1));
+        this.surname.setText(c.getString(2));
+        this.dni.setText(dniGet);
+        this.telefon.setText(c.getString(3));
+
+        switch (c.getString(5)) {
+            case "GEI":
+                this.grauSpinner.setSelection(0);
+                break;
+            case "ADE":
+                this.grauSpinner.setSelection(1);
+                break;
+            case "CAFE":
+                this.grauSpinner.setSelection(2);
+                break;
+            case "GMA":
+                this.grauSpinner.setSelection(3);
+                break;
+            case "GV":
+                this.grauSpinner.setSelection(4);
+                break;
+        }
+
+        switch (c.getString(6)) {
+            case "1r":
+                this.courseSpinner.setSelection(0);
+                break;
+            case "2n":
+                this.courseSpinner.setSelection(1);
+                break;
+            case "3r":
+                this.courseSpinner.setSelection(2);
+                break;
+            case "4rt":
+                this.courseSpinner.setSelection(3);
+                break;
+        }
+
     }
 
 }

@@ -1,6 +1,7 @@
 package albertgomezeloirodriguez.practica1.mobileapps.tecnocampus.cat.eloirodriguezalbertgomez_practica1;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -116,6 +117,9 @@ public class StudentFormCreate extends AppCompatActivity {
                     startActivity(calling);
                     finish();
 
+
+                } catch (SQLiteException e) {
+                    Toast.makeText(getApplicationContext(), "Duplicated DNI", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Fill all the fields", Toast.LENGTH_LONG).show();
                 }

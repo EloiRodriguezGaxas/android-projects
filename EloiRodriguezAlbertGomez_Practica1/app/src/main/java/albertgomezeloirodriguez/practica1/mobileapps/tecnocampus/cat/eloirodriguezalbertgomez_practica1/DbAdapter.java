@@ -145,7 +145,7 @@ public class DbAdapter {
         initialValues.put(Todo.KEY_CURS, curs);
 
 
-        return mDb.insert(Todo.TABLE_NAME, null, initialValues);
+        return mDb.insertOrThrow(Todo.TABLE_NAME, null, initialValues);
     }
 
     /**
@@ -193,6 +193,19 @@ public class DbAdapter {
 
     }
 
+    public int updateStudent(String nom, String surname, String dni, String telf, String grau, String curs) {
+
+        ContentValues values = new ContentValues();
+
+        values.put(Todo.KEY_NOM, nom);
+        values.put(Todo.KEY_SURNAME, surname);
+        values.put(Todo.KEY_TELF, telf);
+        values.put(Todo.KEY_GRAU, grau);
+        values.put(Todo.KEY_CURS, curs);
+
+        return mDb.update(Todo.TABLE_NAME, values, Todo.KEY_DNI+"=?", new String[] {dni});
+
+    }
 
     public boolean isEmpty() {
 
