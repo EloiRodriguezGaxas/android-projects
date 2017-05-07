@@ -41,23 +41,64 @@ public class EditStudent extends AppCompatActivity {
 
         Log.d("SwA", dniGet);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         mDbAdapter = DbAdapter.getInstance(getApplicationContext());
         mDbAdapter.open();
 
-        nom = (EditText) this.findViewById(R.id.textEditName);
-        surname = (EditText) this.findViewById(R.id.editTextSurname);
-        dni = (EditText) this.findViewById(R.id.editTextDni);
-        dni.setText(dniGet, TextView.BufferType.EDITABLE);
-        telefon = (EditText) this.findViewById(R.id.editTextTelf);
+        this.findComponents();
 
+        dni.setText(dniGet);
+
+        this.prepareSpinersListeners();
+
+        cancelStudent = (Button) this.findViewById(R.id.cancelStudentBtnE);
+        cancelStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent calling = new Intent(EditStudent.this, MainActivity.class);
+                startActivity(calling);
+                finish();
+
+            }
+        });
+
+        createStudent = (Button) this.findViewById(R.id.createStudentBtnE);
+        createStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonCreateListener();
+            }
+        });
+
+    }
+
+    //Find all components
+    private void findComponents() {
+
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
+
+        nom = (EditText) this.findViewById(R.id.textEditNameE);
+        surname = (EditText) this.findViewById(R.id.editTextSurnameE);
+        dni = (EditText) this.findViewById(R.id.editTextDniE);
+        telefon = (EditText) this.findViewById(R.id.editTextTelfE);
+
+        //Spiner graus
         adapterGrau = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, graus);
-        grauSpinner = (Spinner) this.findViewById(R.id.spinnerGrau);
+        grauSpinner = (Spinner) this.findViewById(R.id.spinnerGrauE);
         grauSpinner.setAdapter(adapterGrau);
 
+        //Spiner courses
+        adapterCurs = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, curs);
+        courseSpinner = (Spinner) this.findViewById(R.id.spinnerCursE);
+        courseSpinner.setAdapter(adapterCurs);
+
+    }
+
+    //Set the spiners listeners
+    private void prepareSpinersListeners() {
         grauSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -70,10 +111,7 @@ public class EditStudent extends AppCompatActivity {
             }
         });
 
-        adapterCurs = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, curs);
-        courseSpinner = (Spinner) this.findViewById(R.id.spinnerCurs);
-        courseSpinner.setAdapter(adapterCurs);
+
 
         courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -86,55 +124,36 @@ public class EditStudent extends AppCompatActivity {
                 cursEscollit = curs[0];
             }
         });
+    }
 
-        cancelStudent = (Button) this.findViewById(R.id.cancelStudentBtn);
-        cancelStudent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void buttonCreateListener() {
+        try {
 
-                Intent calling = new Intent(EditStudent.this, MainActivity.class);
-                startActivity(calling);
-                finish();
+            Log.i("[INFO]", "Create new Student");
 
+            if (nom.getText().toString().equals("")
+                    || surname.getText().toString().equals("")
+                    || telefon.getText().toString().equals("")
+                    || dni.getText().toString().equals("")) {
+
+                throw new Exception("Not all fields yet");
             }
-        });
 
-        createStudent = (Button) this.findViewById(R.id.createStudentBtn);
-        createStudent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            Student s = new Student(nom.getText().toString(), surname.getText().toString(), telefon.getText().toString(),
+                    dni.getText().toString(), grauEscollit, cursEscollit);
 
-                try {
+            Log.i("[INFO]", s.toString());
 
-                    Log.i("[INFO]", "Create new Student");
+            mDbAdapter.createStudent(s.getNom(), s.getCognom(), s.getDni(), s.getTelf(),
+                    s.getGrau(), s.getCurs());
 
-                    if (nom.getText().toString().equals("")
-                            || surname.getText().toString().equals("")
-                            || telefon.getText().toString().equals("")
-                            || dni.getText().toString().equals("")) {
+            Intent calling = new Intent(EditStudent.this, MainActivity.class);
+            startActivity(calling);
+            finish();
 
-                        throw new Exception("Not all fields yet");
-                    }
-
-                    Student s = new Student(nom.getText().toString(), surname.getText().toString(), telefon.getText().toString(),
-                            dni.getText().toString(), grauEscollit, cursEscollit);
-
-                    Log.i("[INFO]", s.toString());
-
-                    mDbAdapter.createStudent(s.getNom(), s.getCognom(), s.getDni(), s.getTelf(),
-                            s.getGrau(), s.getCurs());
-
-                    Intent calling = new Intent(EditStudent.this, MainActivity.class);
-                    startActivity(calling);
-                    finish();
-
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Fill all the fields", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Fill all the fields", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

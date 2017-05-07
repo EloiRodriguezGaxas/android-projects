@@ -106,10 +106,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                         switch (item.getItemId()) {
 
                             case R.id.viewStudent:
-                                Intent intent = new Intent(holder.mRootView.getContext(), StudentView.class);
-                                String message = mDataset.get(position).getDni();
-                                intent.putExtra("studentDni", message);
-                                holder.mRootView.getContext().startActivity(intent);
+                                Intent intentView = new Intent(holder.mRootView.getContext(), StudentView.class);
+                                String messageView = mDataset.get(position).getDni();
+                                intentView.putExtra("studentDni", messageView);
+                                holder.mRootView.getContext().startActivity(intentView);
                                 Toast.makeText
                                         (holder.mRootView.getContext(),
                                                 "You clicked: VIEW",
@@ -117,10 +117,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                 break;
 
                             case R.id.editStudent:
-                                Intent intent = new Intent(holder.mRootView.getContext(), EditStudent.class);
-                                String message = mDataset.get(position).getDni();
-                                intent.putExtra("studentDni", message);
-                                holder.mRootView.getContext().startActivity(intent);
+                                Intent intentEdit = new Intent(holder.mRootView.getContext(), EditStudent.class);
+                                String messageEdit = mDataset.get(position).getDni();
+                                intentEdit.putExtra("studentDni", messageEdit);
+                                holder.mRootView.getContext().startActivity(intentEdit);
                                 Toast.makeText
                                         (holder.mRootView.getContext(),
                                                 "You clicked: EDIT",
