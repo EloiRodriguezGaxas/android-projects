@@ -37,44 +37,10 @@ public class StudentFormCreate extends AppCompatActivity {
         mDbAdapter = DbAdapter.getInstance(getApplicationContext());
         mDbAdapter.open();
 
-        nom = (EditText) this.findViewById(R.id.textEditName);
-        surname = (EditText) this.findViewById(R.id.editTextSurname);
-        dni = (EditText) this.findViewById(R.id.editTextDni);
-        telefon = (EditText) this.findViewById(R.id.editTextTelf);
+        findComponents();
 
-        adapterGrau = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, graus);
-        grauSpinner = (Spinner) this.findViewById(R.id.spinnerGrau);
-        grauSpinner.setAdapter(adapterGrau);
 
-        grauSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                grauEscollit = graus[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                grauEscollit = graus[0];
-            }
-        });
-
-        adapterCurs = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, curs);
-        courseSpinner = (Spinner) this.findViewById(R.id.spinnerCurs);
-        courseSpinner.setAdapter(adapterCurs);
-
-        courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cursEscollit = curs[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                cursEscollit = curs[0];
-            }
-        });
+        spinersItemListeners();
 
         cancelStudent = (Button) this.findViewById(R.id.cancelStudentBtn);
         cancelStudent.setOnClickListener(new View.OnClickListener() {
@@ -92,41 +58,87 @@ public class StudentFormCreate extends AppCompatActivity {
         createStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                try {
-
-                    Log.i("[INFO]", "Create new Student");
-
-                    if (nom.getText().toString().equals("")
-                            || surname.getText().toString().equals("")
-                            || telefon.getText().toString().equals("")
-                            || dni.getText().toString().equals("")) {
-
-                        throw new Exception("Not all fields yet");
-                    }
-
-                    Student s = new Student(nom.getText().toString(), surname.getText().toString(), telefon.getText().toString(),
-                            dni.getText().toString(), grauEscollit, cursEscollit);
-
-                    Log.i("[INFO]", s.toString());
-
-                    mDbAdapter.createStudent(s.getNom(), s.getCognom(), s.getDni(), s.getTelf(),
-                            s.getGrau(), s.getCurs());
-
-                    Intent calling = new Intent(StudentFormCreate.this, MainActivity.class);
-                    startActivity(calling);
-                    finish();
-
-
-                } catch (SQLiteException e) {
-                    Toast.makeText(getApplicationContext(), "Duplicated DNI", Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Fill all the fields", Toast.LENGTH_LONG).show();
-                }
-
+                createBtnListener();
             }
         });
 
+    }
+
+    private void spinersItemListeners() {
+        grauSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                grauEscollit = graus[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                grauEscollit = graus[0];
+            }
+        });
+
+
+        courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cursEscollit = curs[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                cursEscollit = curs[0];
+            }
+        });
+    }
+
+    private void createBtnListener() {
+        try {
+
+            Log.i("[INFO]", "Create new Student");
+
+            if (nom.getText().toString().equals("")
+                    || surname.getText().toString().equals("")
+                    || telefon.getText().toString().equals("")
+                    || dni.getText().toString().equals("")) {
+
+                throw new Exception("Not all fields yet");
+            }
+
+            Student s = new Student(nom.getText().toString(), surname.getText().toString(), telefon.getText().toString(),
+                    dni.getText().toString(), grauEscollit, cursEscollit);
+
+            Log.i("[INFO]", s.toString());
+
+            mDbAdapter.createStudent(s.getNom(), s.getCognom(), s.getDni(), s.getTelf(),
+                    s.getGrau(), s.getCurs());
+
+            Intent calling = new Intent(StudentFormCreate.this, MainActivity.class);
+            startActivity(calling);
+            finish();
+
+
+        } catch (SQLiteException e) {
+            Toast.makeText(getApplicationContext(), "Duplicated DNI", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Fill all the fields", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void findComponents() {
+        nom = (EditText) this.findViewById(R.id.textEditName);
+        surname = (EditText) this.findViewById(R.id.editTextSurname);
+        dni = (EditText) this.findViewById(R.id.editTextDni);
+        telefon = (EditText) this.findViewById(R.id.editTextTelf);
+
+        adapterGrau = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, graus);
+        grauSpinner = (Spinner) this.findViewById(R.id.spinnerGrau);
+        grauSpinner.setAdapter(adapterGrau);
+
+        adapterCurs = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, curs);
+        courseSpinner = (Spinner) this.findViewById(R.id.spinnerCurs);
+        courseSpinner.setAdapter(adapterCurs);
     }
 
 
