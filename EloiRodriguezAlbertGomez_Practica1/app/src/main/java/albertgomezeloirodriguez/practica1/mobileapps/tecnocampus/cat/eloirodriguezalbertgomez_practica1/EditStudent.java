@@ -116,7 +116,6 @@ public class EditStudent extends AppCompatActivity {
         });
 
 
-
         courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -164,12 +163,12 @@ public class EditStudent extends AppCompatActivity {
 
         Cursor c = mDbAdapter.fetchTodo(this.dniGet);
 
-        this.nom.setText(c.getString(1));
-        this.surname.setText(c.getString(2));
+        this.nom.setText(c.getString(DbAdapter.Todo.ROW_NOM));
+        this.surname.setText(c.getString(DbAdapter.Todo.ROW_SURNAME));
         this.dni.setText(dniGet);
-        this.telefon.setText(c.getString(3));
+        this.telefon.setText(c.getString(DbAdapter.Todo.ROW_TELF));
 
-        switch (c.getString(5)) {
+        switch (c.getString(DbAdapter.Todo.ROW_GRAU)) {
             case "GEI":
                 this.grauSpinner.setSelection(0);
                 break;
@@ -187,7 +186,7 @@ public class EditStudent extends AppCompatActivity {
                 break;
         }
 
-        switch (c.getString(6)) {
+        switch (c.getString(DbAdapter.Todo.ROW_CURS)) {
             case "1r":
                 this.courseSpinner.setSelection(0);
                 break;

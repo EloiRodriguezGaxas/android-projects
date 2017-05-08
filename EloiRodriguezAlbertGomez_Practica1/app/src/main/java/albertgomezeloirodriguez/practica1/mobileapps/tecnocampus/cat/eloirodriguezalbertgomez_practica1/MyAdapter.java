@@ -114,8 +114,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                 String messageView = mDataset.get(position).getDni();
                                 intentView.putExtra("studentDni", messageView);
                                 holder.mRootView.getContext().startActivity(intentView);
-                                 intent = new Intent(holder.mRootView.getContext(), StudentView.class);
-                                 message = mDataset.get(position).getDni();
+                                intent = new Intent(holder.mRootView.getContext(), StudentView.class);
+                                message = mDataset.get(position).getDni();
                                 intent.putExtra("studentDni", message);
                                 holder.mRootView.getContext().startActivity(intent);
                                 Toast.makeText
